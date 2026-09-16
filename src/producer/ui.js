@@ -153,7 +153,7 @@ function renderSeasonCard() {
         <div class="ss"><b>${st.kisses}</b><span>kisses</span></div><div class="ss"><b>${st.arguments}</b><span>fire pit rows</span></div><div class="ss"><b>${st.recouplings}</b><span>recouplings</span></div>
         <div class="ss"><b>${st.bombshells}</b><span>bombshells</span></div><div class="ss"><b>${st.dumpings}</b><span>dumped</span></div><div class="ss"><b>${st.stuck}/${st.stuck + st.twisted}</b><span>stuck at Casa</span></div>
       </div>
-      <div class="sc-foot">The Villa · thevilla.game</div>
+      <div class="sc-foot">The Villa · the-villa-six.vercel.app</div>
     </div>
     <div class="btn-row"><button class="cta" id="sc-share">📣 Share</button><button class="cta alt" id="sc-new">New season</button></div>
     <button class="ghost-btn wide" id="sc-home">Home</button>

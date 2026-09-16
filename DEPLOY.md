@@ -28,9 +28,9 @@ A browser window may open to sign in the first time. (`bash publish.sh jharper21
 
 1. Go to https://vercel.com/new and pick **Import Git Repository** → `the-villa`.
 2. Framework preset: **Other**. Build command: **leave empty**. Output directory: **leave empty**. Root directory: leave as is.
-3. Click **Deploy**. You get `https://the-villa.vercel.app` (or `the-villa-<something>.vercel.app` if the name is taken; you can rename it under Project → Settings → Domains).
+3. Click **Deploy**.
 
-After that every `git push` redeploys automatically. Open `https://<your-url>/?qa=1` once to run the smoke test on the live site.
+Done on 2026-09-16: the game lives at **https://the-villa-six.vercel.app** (Vercel added `-six` because `the-villa` was taken; you can pick a nicer name under Project → Settings → Domains). Every `git push` redeploys automatically. Open https://the-villa-six.vercel.app/?qa=1 after a deploy to run the smoke test on the live site.
 
 ## 3. Supabase (five minutes, optional but recommended)
 

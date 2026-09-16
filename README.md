@@ -2,6 +2,8 @@
 
 A dating-show villa you can run or live in. Cast ten strangers, pick the bombshells, send the Casa Amor postcard and vote like the public; or build yourself an islander, walk in, pull people for chats, survive the recouplings and try to make the final. Twenty-two episodes a season, a decision nearly every night, and a card at the end built to be screenshotted.
 
+**Play it now: https://the-villa-six.vercel.app** (add it to your phone's home screen from there).
+
 Zero build step: plain HTML, CSS and ES modules, served by any static host. No accounts. Saves live in the browser. An optional free Supabase project turns the Hall of Islanders into a global leaderboard (see [DEPLOY.md](DEPLOY.md)).
 
 ## Play it on your laptop
