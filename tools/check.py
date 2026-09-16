@@ -66,7 +66,7 @@ for path in modules:
     if f"'{rel}'" not in sw:
         problems.append(f'sw.js SHELL is missing {rel}')
 
-for fn in ('index.html', 'manifest.webmanifest', 'README.md', 'DEPLOY.md'):
+for fn in ('index.html', 'manifest.webmanifest', 'README.md'):  # DEPLOY.md may name the other game on purpose
     p = os.path.join(ROOT, fn)
     if os.path.exists(p) and re.search(r'Gridiron|The Blitz', read(p)):
         problems.append(f'{fn}: mentions the other game')

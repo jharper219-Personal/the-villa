@@ -122,6 +122,7 @@ export async function runQA(G) {
     if (G && G.home) {
       await step('ui: home renders', async () => { G.home(); await until(() => document.querySelectorAll('.mode-card').length >= 2, 2000, 'mode cards'); });
       await step('ui: producer cast board, pick 5+5, night one, three episodes', async () => {
+        localStorage.removeItem('villa-producer-v1'); G.home(); await sleep(50);
         click('#mode-producer'); await until(() => has('.cast-card'), 3000, 'cast board');
         for (const tab of ['tab-f', 'tab-m']) {
           click(`#${tab}`); await sleep(30);

@@ -21,6 +21,25 @@ export function flash(msg, cls = '') {
   setTimeout(() => t.remove(), 2600);
 }
 export const pill = (text, cls = '') => `<span class="pill ${cls}">${text}</span>`;
+/** A short burst of falling emoji for the moments that deserve one. */
+export function celebrate(kind = 'hearts') {
+  try {
+    const set = { hearts: ['💗', '💕', '💖', '✨', '💘'], win: ['🏆', '🎉', '✨', '💗', '🥂', '🎊'], fire: ['🔥', '💋', '✨', '💗'], sad: ['🧳', '💔', '🥲'] }[kind] || ['✨'];
+    const wrap = document.createElement('div');
+    wrap.className = 'confetti';
+    for (let i = 0; i < 22; i++) {
+      const s = document.createElement('span');
+      s.textContent = set[i % set.length];
+      s.style.left = `${Math.random() * 100}%`;
+      s.style.animationDelay = `${Math.random() * 0.5}s`;
+      s.style.animationDuration = `${1.6 + Math.random() * 1.2}s`;
+      s.style.fontSize = `${16 + Math.random() * 18}px`;
+      wrap.appendChild(s);
+    }
+    document.body.appendChild(wrap);
+    setTimeout(() => wrap.remove(), 3400);
+  } catch { /* purely decorative */ }
+}
 export const meter = (v, cls = '', label = '') => `<div class="meter ${cls}" title="${esc(label)}"><div class="meter-fill" style="width:${Math.max(2, Math.min(100, v))}%"></div></div>`;
 export const popChip = (S, id) => { const v = pop(S, id); return `<span class="popchip ${v >= 65 ? 'hot' : v < 40 ? 'cold' : ''}">${v >= 65 ? '🔥' : v < 40 ? '🥶' : '📺'} ${v}</span>`; };
 export const dayLabel = (S) => `Day ${S.day} of ${SEASON_DAYS}`;
@@ -112,7 +131,7 @@ export function episodeScreen({ app, S, scenes, from = 0, header = '', footer = 
   // Reveal groups: everything up to and including the next `reveal` scene shows on one tap.
   const groups = [];
   let cur = [];
-  list.forEach((sc, i) => { cur.push(i); if (sc.reveal || sc.big) { groups.push(cur); cur = []; } });
+  list.forEach((sc, i) => { cur.push(i); if (sc.reveal || sc.big || cur.length >= 3) { groups.push(cur); cur = []; } });
   if (cur.length) groups.push(cur);
   let g = 0;
   app.innerHTML = `<section class="screen episode">${backHTML}${header}
@@ -121,7 +140,19 @@ export function episodeScreen({ app, S, scenes, from = 0, header = '', footer = 
     <div class="ep-bar"><button class="ghost-btn slim" id="ep-skip" ${groups.length <= 1 ? 'hidden' : ''}>Skip to the end</button><button class="cta" id="ep-next">${list.length ? 'Play ▶' : nextLabel}</button></div>
     ${footer}</section>`;
   const nodes = [...app.querySelectorAll('#scenes .scene')];
-  const show = (idxs) => { let last = null; for (const i of idxs) { nodes[i].classList.remove('hid'); nodes[i].classList.add('in'); last = nodes[i]; } if (last) { const big = idxs.some((i) => list[i].big || list[i].reveal); if (big) buzz(list[idxs[idxs.length - 1]].kind === 'text' ? [30, 60, 30] : 18); last.scrollIntoView({ behavior: 'smooth', block: 'center' }); } };
+  const show = (idxs) => {
+    let last = null;
+    for (const i of idxs) { nodes[i].classList.remove('hid'); nodes[i].classList.add('in'); last = nodes[i]; }
+    if (!last) return;
+    const sc = list[idxs[idxs.length - 1]];
+    const mine = S.playerId && (sc.who || []).includes(S.playerId);
+    if (sc.big || sc.reveal) buzz(sc.kind === 'text' ? [30, 60, 30] : 18);
+    if (sc.kind === 'kiss' && (mine || S.mode === 'producer')) celebrate('fire');
+    else if (sc.kind === 'final' && sc.big && sc.reveal) celebrate('win');
+    else if (sc.kind === 'recouple' && mine && sc.big) celebrate('hearts');
+    else if (sc.kind === 'dump' && mine) celebrate('sad');
+    last.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
   const finish = () => { const after = document.getElementById('ep-after'); if (after) { after.hidden = false; } const b = document.getElementById('ep-next'); if (b) b.textContent = nextLabel; const sk = document.getElementById('ep-skip'); if (sk) sk.hidden = true; };
   const next = () => {
     if (g < groups.length) { show(groups[g]); g++; if (g >= groups.length) finish(); else { const b = document.getElementById('ep-next'); if (b) b.textContent = list[groups[g][groups[g].length - 1]].reveal ? 'Reveal ›' : 'Next ›'; } return; }
