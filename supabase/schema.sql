@@ -205,3 +205,6 @@ create or replace view public.an_funnel as
 -- Rename a rude username:   update vl_users set display = 'Islander42' where handle = 'rudename';
 -- Remove a run:             delete from vl_runs where id = 123;
 -- Ban a username entirely:  delete from vl_users where handle = 'rudename';   (cascades to their runs)
+-- Drop the empty Blitz tables that were pasted into this project by mistake on 2026-09-16
+-- (only run this in The Villa's project, never in The Blitz's):
+--   drop table if exists public.cb_entries, public.lb_entries, public.lb_users cascade;

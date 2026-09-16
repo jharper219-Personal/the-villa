@@ -1,6 +1,6 @@
 // The Villa service worker: cache the app shell so the game opens instantly and works offline
 // once it has loaded once. Network first so updates show up; cache fallback so it works on a beach.
-const VERSION = 'villa-v1';
+const VERSION = 'villa-v2';
 const SHELL = ['./', './index.html', './styles.css', './manifest.webmanifest',
   './src/main.js', './src/league-config.js', './src/league.js', './src/analytics.js',
   './src/villa/rng.js', './src/villa/cast.js', './src/villa/portrait.js', './src/villa/model.js', './src/villa/text.js', './src/villa/challenges.js', './src/villa/engine.js',

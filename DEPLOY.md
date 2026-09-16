@@ -56,6 +56,8 @@ git add -A && git commit -m "Connect the Hall of Islanders" && git push
 
 Open the game: the Hall of Islanders button now says **global board**.
 
+Done on 2026-09-16: project ref `rwdqwpxxatfzbcsvzews`, schema applied, keys in `src/league-config.js`. The first paste used The Blitz's schema by mistake, so the database also holds empty `lb_*`/`cb_*` tables; they are harmless and can be dropped with the snippet at the bottom of `supabase/schema.sql`.
+
 The key is meant to be public. It can only call the `vl_*` and `an_*` functions in the schema; row level security stops anyone reading or writing the tables directly, and every write checks the username's secret token (hashed in the database).
 
 ### What the database holds

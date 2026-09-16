@@ -7,6 +7,6 @@
 // The publishable key is designed to ship in client code. The database exposes only a handful
 // of guarded functions (see supabase/schema.sql); nobody can read or write the tables directly.
 export const LEAGUE = {
-  url: '',
-  anonKey: '',
+  url: 'https://rwdqwpxxatfzbcsvzews.supabase.co',
+  anonKey: 'sb_publishable_7cSdFn3PS9GahqWaAaDsfg_cXFzAkPa',  // publishable key (sb_publishable_...) or legacy anon key (eyJ...). Never the secret/service_role key.
 };
